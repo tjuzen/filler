@@ -9,11 +9,13 @@
 
 typedef	struct	s_arg_filler
 {
-	int    player;
-	int    map_size_x;
-	int    map_size_y;
-  char    **map;
-  char    **piece;
+	int		player;
+	int		map_size_x;
+	int		map_size_y;
+	int		piece_x;
+	int		piece_y;
+  	char    **map;
+  	char    **piece;
 }				t_arg_filler;
 
 

@@ -19,6 +19,9 @@
 # include <inttypes.h>
 # include <stdio.h>
 # include <limits.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 # define BUFF_SIZE 2048
 
 typedef struct	s_list

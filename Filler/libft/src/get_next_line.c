@@ -43,7 +43,8 @@ int		nextline(char *str, char **line)
 
 	if (!(ft_strrchr(str, '\n')))
 	{
-		tmp = str;
+		if (!(tmp = ft_strjoin(*line, str)))
+			return (-1);
 		ft_strdel(line);
 		*line = tmp;
 		tmp = NULL;
