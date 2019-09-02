@@ -22,20 +22,20 @@ int get_piece_size(t_arg_filler *arg, char *line)
       tmp *= 10;
       i++;
     }
-    if (arg->piece_x == 0 && tmp != 0)
+    if (arg->piece_size_x == 0 && tmp != 0)
     {
-      arg->piece_x = tmp / 10;
+      arg->piece_size_x = tmp / 10;
       tmp = 0;
     }
-    if (arg->piece_y == 0 && tmp != 0)
+    if (arg->piece_size_y == 0 && tmp != 0)
     {
-      arg->piece_y = tmp / 10;
+      arg->piece_size_y = tmp / 10;
       tmp = 0;
     }
     tmp = 0;
     i++;
   }
-  if (!(arg->piece = (char **)ft_memalloc(sizeof(char *) * (arg->piece_x + 1))))
+  if (!(arg->piece = (char **)ft_memalloc(sizeof(char *) * (arg->piece_size_x + 1))))
       return (-1);
   return (0);
 }

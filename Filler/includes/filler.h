@@ -13,11 +13,12 @@ typedef	struct	s_arg_filler
 	char		player;
 	int			map_size_x;
 	int			map_size_y;
-	int			piece_x;
-	int			piece_y;
-	int			*last_piece;
+	int			piece_size_x;
+	int			piece_size_y;
   char    **map;
   char    **piece;
+	int			ret_x;
+	int			ret_y;
 }				t_arg_filler;
 
 /*
@@ -29,11 +30,13 @@ int main();
 ** TOOLS.C
 */
 void ft_free_stringtab(char **element);
+void ft_free_intab(int *element);
 void free_all(t_arg_filler *arg);
 void init_arg(t_arg_filler *arg);
 void print_map(t_arg_filler *arg);
 void print_piece(t_arg_filler *arg);
 void get_players(t_arg_filler *arg);
+void print_ret(t_arg_filler *arg);
 
 /*
 ** GET_PIECE.C
@@ -55,6 +58,10 @@ int get_map_prout(t_arg_filler *arg, char *line, int i);
 */
 
 int play(t_arg_filler *arg);
+int is_placable(t_arg_filler *arg, int x, int y);
+int place_piece(t_arg_filler *arg);
+int ft_checkplace_piece(t_arg_filler *arg, int x, int y);
+
 
 
 #endif

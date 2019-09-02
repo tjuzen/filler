@@ -1,5 +1,5 @@
-seed = 8838
-X: error on input
-./resources/players/grati.filler won
+seed = 2623
+O: timedout
+./tjuzen.filler won
 Score:
-21AGAINST20
+1AGAINST0
