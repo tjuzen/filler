@@ -19,12 +19,15 @@ typedef	struct	s_arg_filler
   char    **piece;
 	int			ret_x;
 	int			ret_y;
+	int			flag_for_debug;
 }				t_arg_filler;
 
 /*
 ** MAIN.C
 */
 int main();
+void reset_args(t_arg_filler *arg);
+int get_updated(t_arg_filler *arg);
 
 /*
 ** TOOLS.C
@@ -59,8 +62,8 @@ int get_map_prout(t_arg_filler *arg, char *line, int i);
 
 int play(t_arg_filler *arg);
 int is_placable(t_arg_filler *arg, int x, int y);
-int place_piece(t_arg_filler *arg);
-int ft_checkplace_piece(t_arg_filler *arg, int x, int y);
+int place_piece_top(t_arg_filler *arg);
+int check_one_touch(t_arg_filler *arg, int x, int y);
 
 
 
