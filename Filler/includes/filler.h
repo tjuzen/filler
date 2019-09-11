@@ -15,8 +15,8 @@ typedef	struct	s_arg_filler
 	int			map_size_y;
 	int			piece_size_x;
 	int			piece_size_y;
-  char    **map;
-  char    **piece;
+  	char  	    **map;
+  	char   	    **piece;
 	int			ret_x;
 	int			ret_y;
 	int			flag_for_debug;
@@ -25,6 +25,7 @@ typedef	struct	s_arg_filler
 /*
 ** MAIN.C
 */
+
 int main();
 void reset_args(t_arg_filler *arg);
 int get_updated(t_arg_filler *arg);

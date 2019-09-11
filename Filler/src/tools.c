@@ -75,22 +75,6 @@ void print_piece(t_arg_filler *arg)
 
 void get_players(t_arg_filler *arg)
 {
-	if (arg->flag_for_debug == 1)
-	{
-		char	*line;
-		int fd;
-		fd = open("./playertest", O_RDONLY);
-		get_next_line(fd, &line);
-		ft_printf("Ma line = %s\n", line);
-		if (ft_strstr(line, "p1"))
-			arg->player = 'O';
-		else if (ft_strstr(line, "p2"))
-	    	arg->player = 'X';
-	  	ft_strdel(&line);
-		close(fd);
-	}
-	else
-	{
 		char	*line;
 
 		get_next_line(0, &line);
@@ -99,6 +83,4 @@ void get_players(t_arg_filler *arg)
 		else if (ft_strstr(line, "p2"))
 	    	arg->player = 'X';
 	  	ft_strdel(&line);
-	}
-
 }
