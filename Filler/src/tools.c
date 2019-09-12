@@ -56,7 +56,7 @@ void print_map(t_arg_filler *arg)
 	i = 0;
 	while (arg->map[i])
 	{
-		ft_printf("%s\n", arg->map[i]);
+		ft_printf("--%s--\n", arg->map[i]);
 		i++;
 	}
 }
@@ -68,7 +68,7 @@ void print_piece(t_arg_filler *arg)
 	i = 0;
 	while (arg->piece[i])
 	{
-		ft_printf("%s\n", arg->piece[i]);
+		ft_printf("-%s-\n", arg->piece[i]);
 		i++;
 	}
 }

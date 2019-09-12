@@ -18,22 +18,39 @@ int check_one_touch(t_arg_filler *arg, int x, int y)
 	int		tmp;
 	int		compt;
 
-	i = -1;
+	i = 0;
 	tmp = y;
 	compt = 0;
 
-	while (arg->piece[++i])
+	// ft_printf("\n\npos = %i %i\n\n", x, y);
+	//
+	// print_map(arg);
+	// print_piece(arg);
+
+	while (arg->piece[i])
 	{
-		j = -1;
+		j = 0;
 		y = tmp;
-		while (arg->piece[i][++j])
+		while (arg->piece[i][j])
 		{
-			if (arg->piece[i][j] == '*' && arg->map[x][y] == arg->player)
-				compt++;
+			// ft_printf("mon x = %i mon y = %i\nma piece = %c ma map = %c\n", x, y, arg->piece[i][j], arg->map[x][y]);
+			// ft_printf("p = %c m = %c\n", arg->piece[i][j], arg->map[x][y]);
+			if (x >= 0 && x < arg->map_size_x && y >= 0 && y < arg->map_size_y)
+			{
+				// ft_printf("oui\n");
+				if (arg->map[x][y] == arg->player)
+				{
+					// ft_printf("\ncheck\n\n");
+					compt++;
+				}
+			}
 			y++;
+			j++;
 		}
 		x++;
+		i++;
 	}
+	// ft_printf("ici\n");
 	return ((compt > 1) ? 0 : 1);
 }
 
@@ -52,10 +69,16 @@ int check_others(t_arg_filler *arg, int x, int y)
 		y = tmp;
 		while (arg->piece[i][++j])
 		{
-			if (arg->piece[i][j] == '*' && (arg->map[x][y] == 'O' || arg->map[x][y] == 'o'))
-				return (0);
-				if (arg->piece[i][j] == '*' && (x < 0 || y < 0))
-					return (0);
+			if (arg->piece[i][j] == '*')
+			{
+				if (x >= 0 && x < arg->map_size_x && y >= 0 && y < arg->map_size_y)
+				{
+					if ((arg->map[x][y] == 'O' || arg->map[x][y] == 'o'))
+						return (0);
+					// if (arg->piece[i][j] == '*' && (x < 0 || y < 0 || x > arg->map_size_x || y > arg->map_size_y))
+					// 	return (0);
+				}
+			}
 			y++;
 		}
 		x++;
@@ -85,7 +108,8 @@ int is_placable(t_arg_filler *arg, int x, int y)
   				return (1);
 			}
   		}
-		return (0);
+		// else
+		// 	return (0);
       }
     }
   }
@@ -138,7 +162,11 @@ int play(t_arg_filler *arg)
 {
 	if (arg->map == NULL || arg->piece == NULL)
 		return (-1);
-	place_piece_top(arg);
+	if (place_piece_top(arg) == 0)
+	{
+		ft_printf("0 0\n");
+		return (-1);
+	}
 	// place_piece_bot(arg);
   	print_ret(arg);
 	reset(arg);

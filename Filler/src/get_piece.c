@@ -44,12 +44,14 @@ int get_piece_prout(t_arg_filler *arg, char *line, int i)
 {
   if (arg->flag != 2)
   {
-    get_piece_size(arg, line);
+    if (get_piece_size(arg, line) == -1)
+		return (-1);
     arg->flag = 2;
   }
   else
   {
-    get_piece(arg, line, i);
+    if (get_piece(arg, line, i) == -1)
+		return (-1);
     i++;
   }
   return (i);

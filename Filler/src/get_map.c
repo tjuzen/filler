@@ -49,14 +49,16 @@ int get_map_prout(t_arg_filler *arg, char *line, int i)
   }
   if (arg->flag != 1)
   {
-    get_map_size(arg, line);
+    if (get_map_size(arg, line) == -1)
+		return (-1);
     arg->flag = 1;
   }
   else
   {
     if (ft_strstr(line, "   012"))
       return (i);
-    get_map(arg, line, i);
+    if (get_map(arg, line, i) == -1)
+		return (-1);
     i++;
   }
   return (i);

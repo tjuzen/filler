@@ -1,7 +1,5 @@
-seed = 9209
+seed = 1574
 O: error on input
-X: error on input
-./tjuzen.filler: Segfault at 13
-./tjuzen.filler won
+./resources/players/superjeannot.filler won
 Score:
-9AGAINST13
+24AGAINST7
