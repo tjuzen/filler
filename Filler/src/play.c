@@ -26,7 +26,7 @@ int check_one_touch(t_arg_filler *arg, int x, int y)
 	//
 	// print_map(arg);
 	// print_piece(arg);
-
+	// ft_printf("voici ma pos de map : x = %i y = %i\n", x, y);
 	while (arg->piece[i])
 	{
 		j = 0;
@@ -51,7 +51,7 @@ int check_one_touch(t_arg_filler *arg, int x, int y)
 		i++;
 	}
 	// ft_printf("ici\n");
-	return ((compt > 1) ? 0 : 1);
+	return ((compt == 1) ? 1 : 0);
 }
 
 int check_others(t_arg_filler *arg, int x, int y)
@@ -116,22 +116,53 @@ int is_placable(t_arg_filler *arg, int x, int y)
   return (0);
 }
 
+int is_placable_krusty(t_arg_filler *arg, int x, int y)
+{
+  int i;
+  int j;
+  int compt_star;
+
+  compt_star = 0;
+  i = -1;
+  while (arg->piece[++i])
+  {
+    j = -1;
+    while (arg->piece[i][++j])
+    {
+      if (arg->piece[i][j] == '*')
+      {
+		  if (x + i < 0 || x + i >= arg->map_size_x || y + j < 0 || y + j > arg->map_size_y)
+		  	return (0);
+		if (arg->map[x + i][y + j] == 'O' || arg->map[x + i][y + j] == 'o')
+			return (0);
+		if (arg->map[x + i][y + j] == 'X' || arg->map[x + i][y + j] == 'x')
+			compt_star++;
+      }
+    }
+  }
+  return (compt_star == 1) ? 1 : 0;
+}
+
 int place_piece_top(t_arg_filler *arg)
 {
   int x;
   int y;
 
-  x = -1;
-  while (arg->map[++x])
+  x = 1 - arg->piece_size_x;
+  while (++x < arg->map_size_x + arg->piece_size_x)
   {
-    y = -1;
-    while (arg->map[x][++y])
+    y = 1 - arg->piece_size_y;
+    while (++y < arg->piece_size_y + arg->map_size_y)
     {
-      if (arg->map[x][y] == arg->player)
-      {
-        if (is_placable(arg, x, y) == 1)
-          return (1);
-      }
+      // if (arg->map[x][y] == arg->player)
+      // {
+        if (is_placable_krusty(arg, x, y) == 1)
+		{
+			arg->ret_x = x;
+	  		arg->ret_y = y;
+	  		return (1);
+		}
+      // }
     }
   }
   return (0);
