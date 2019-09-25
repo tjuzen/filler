@@ -33,9 +33,11 @@ void free_all(t_arg_filler *arg)
 void init_arg(t_arg_filler *arg)
 {
 	arg->player = 0;
+	arg->enemy = 0;
 	arg->map_size_x = 0;
 	arg->map_size_y = 0;
 	arg->map = NULL;
+	arg->old_map = NULL;
 	arg->piece_size_x = 0;
 	arg->piece_size_y = 0;
 	arg->piece = NULL;
@@ -56,7 +58,7 @@ void print_map(t_arg_filler *arg)
 	i = 0;
 	while (arg->map[i])
 	{
-		ft_printf("--%s--\n", arg->map[i]);
+		fprintf(stderr, "--%s--\n", arg->map[i]);
 		i++;
 	}
 }
@@ -68,7 +70,7 @@ void print_piece(t_arg_filler *arg)
 	i = 0;
 	while (arg->piece[i])
 	{
-		ft_printf("-%s-\n", arg->piece[i]);
+		fprintf(stderr, "-%s\n", arg->piece[i]);
 		i++;
 	}
 }
@@ -79,8 +81,14 @@ void get_players(t_arg_filler *arg)
 
 		get_next_line(0, &line);
 		if (ft_strstr(line, "p1"))
+		{
 			arg->player = 'O';
+			arg->enemy = 'X';
+		}
 		else if (ft_strstr(line, "p2"))
-	    	arg->player = 'X';
+	    {
+			arg->player = 'X';
+			arg->enemy = 'O';
+		}
 	  	ft_strdel(&line);
 }

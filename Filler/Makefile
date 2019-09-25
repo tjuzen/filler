@@ -1,6 +1,6 @@
 NAME = tjuzen.filler
 CC = gcc
-FLAGS = #-Wall -Werror -Wextra
+#FLAGS = -fsanitize=address
 LIBFT = $(LIBDIR)libftprintf.a
 SRCDIR = ./src/
 OBJDIR = ./obj/

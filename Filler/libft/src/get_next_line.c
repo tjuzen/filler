@@ -12,72 +12,69 @@
 
 #include "../includes/libft.h"
 
-void	charctox(char *str, char c, char x)
+char			*ft_stock_the_new_line(char *str)
 {
-	while (*str != x && *str)
+	int			i;
+	int			len;
+	char		*new;
+
+	i = 0;
+	len = 0;
+	while (str[len++])
+		;
+	if (!(new = (char *)malloc(sizeof(*new) * len + 1)))
+		return (NULL);
+	while (i < len && str[i] != '\n')
 	{
-		if (*str == c)
-			*str = x;
-		str++;
+		new[i] = str[i];
+		i++;
 	}
+	new[i] = '\0';
+	return (new);
 }
 
-int		newline(char *str, char **line)
+static char		*ft_clean_new(char *str)
 {
-	char	*tmp;
+	char		*new;
+	int			i;
 
-	if (!(tmp = ft_strdup(str)))
-		return (-1);
-	str = ft_strcpy(str, ft_strchr(str, '\n') + 1);
-	charctox(tmp, '\n', '\0');
-	if (!(*line = ft_strjoin(*line, tmp)))
-		return (-1);
-	ft_strdel(&tmp);
-	return (1);
-}
-
-int		nextline(char *str, char **line)
-{
-	int		b;
-	static char	*tmp;
-
-	if (!(ft_strrchr(str, '\n')))
+	i = 0;
+	while (str[i] != '\n' && str[i])
+		i++;
+	if ((str[i] && !str[i + 1]) || !str[i])
 	{
-		if (!(tmp = ft_strjoin(*line, str)))
-			return (-1);
-		ft_strdel(line);
-		*line = tmp;
-		tmp = NULL;
-		b = BUFF_SIZE;
-		while (b--)
-			str[b] = 0;
-		return (0);
+		ft_strdel(&str);
+		return (NULL);
 	}
-	else
-		newline(str, line);
-	return (1);
+	new = ft_strdup(str + i + 1);
+	ft_strdel(&str);
+	return (new);
 }
 
-int		get_next_line(const int fd, char **line)
+int				get_next_line(const int fd, char **line)
 {
-	static char	*str[OPEN_MAX];
+	char		buff[BUFF_SIZE + 1];
 	int			ret;
+	static char	*new;
 
-	if (fd < 0 || !line || BUFF_SIZE <= 0 ||
-			(!(*line = ft_strnew(BUFF_SIZE))) ||
-			fd > OPEN_MAX)
+	if (!new)
+		new = ft_strnew(1);
+	if (BUFF_SIZE < 0 || !line || fd > 2560 || fd < 0)
 		return (-1);
-	if (!str[fd])
-		if (!(str[fd] = ft_strnew(BUFF_SIZE)))
-			return (-1);
-	if (nextline(str[fd], line))
-		return (1);
-	while ((ret = read(fd, str[fd], BUFF_SIZE)))
+	ret = 2;
+	while (!(ft_strchr(new, '\n')))
 	{
-		if (ret < 0)
+		ret = read(fd, buff, BUFF_SIZE);
+		if (ret == -1)
 			return (-1);
-		if (nextline(str[fd], line))
-			return (1);
+		buff[ret] = '\0';
+		new = ft_strjoin(new, buff);
+		if (ret == 0 && *new == '\0')
+			return (0);
+		if (ret == 0)
+			break ;
 	}
-	return (**line == 0) ? 0 : 1;
+	*line = ft_stock_the_new_line(new);
+	new = ft_clean_new(new);
+	return (1);
 }
