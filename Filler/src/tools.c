@@ -44,6 +44,9 @@ void init_arg(t_arg_filler *arg)
 	arg->flag = 0;
 	arg->ret_x = 0;
 	arg->ret_y = 0;
+	arg->strategy = 0;
+	arg->start = 0;
+	arg->previous_x = 0;
 }
 
 void print_ret(t_arg_filler *arg)

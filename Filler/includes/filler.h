@@ -21,6 +21,9 @@ typedef	struct	s_arg_filler
   	char   	    **piece;
 	int			ret_x;
 	int			ret_y;
+	int			strategy;
+	int			start;
+	int			previous_x;
 }				t_arg_filler;
 
 /*
@@ -68,5 +71,6 @@ int play(t_arg_filler *arg);
 int is_placable(t_arg_filler *arg, int x, int y);
 int place_piece_top(t_arg_filler *arg);
 int check_one_touch(t_arg_filler *arg, int x, int y);
+int is_placable_krusty(t_arg_filler *arg, int x, int y);
 
 #endif
