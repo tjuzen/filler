@@ -17,13 +17,12 @@ typedef	struct	s_arg_filler
 	int			piece_size_x;
 	int			piece_size_y;
   	char  	    **map;
-	char		**old_map;
   	char   	    **piece;
 	int			ret_x;
 	int			ret_y;
 	int			strategy;
 	int			start;
-	int			previous_x;
+	int			obj;
 }				t_arg_filler;
 
 /*

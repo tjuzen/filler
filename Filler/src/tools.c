@@ -37,7 +37,6 @@ void init_arg(t_arg_filler *arg)
 	arg->map_size_x = 0;
 	arg->map_size_y = 0;
 	arg->map = NULL;
-	arg->old_map = NULL;
 	arg->piece_size_x = 0;
 	arg->piece_size_y = 0;
 	arg->piece = NULL;
@@ -46,7 +45,7 @@ void init_arg(t_arg_filler *arg)
 	arg->ret_y = 0;
 	arg->strategy = 0;
 	arg->start = 0;
-	arg->previous_x = 0;
+	arg->obj = 0;
 }
 
 void print_ret(t_arg_filler *arg)
