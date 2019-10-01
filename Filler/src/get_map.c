@@ -28,16 +28,18 @@ int get_map_size(t_arg_filler *arg, char *line)
     tmp = 0;
     i++;
   }
-  if (!(arg->map = (char **)ft_memalloc(sizeof(char *) * (arg->map_size_x + 1))))
-      return (-1);
-  return (0);
+    if (!(arg->map = (char **)ft_memalloc(sizeof(char *) * (arg->map_size_x + 1))))
+        return (-1);
+    if (!(arg->special_map = (int **)ft_memalloc(sizeof(int *) * (arg->map_size_x + 1))))
+        return (-1);
+    return (0);
 }
 
 int get_map(t_arg_filler *arg, char *line, int i)
 {
-  if (!(arg->map[i] = ft_strsub(line, 4, arg->map_size_y)))
-    return (-1);
-  return (0);
+    if (!(arg->map[i] = ft_strsub(line, 4, arg->map_size_y)))
+        return (-1);
+    return (0);
 }
 
 int get_map_prout(t_arg_filler *arg, char *line, int i)

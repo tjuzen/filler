@@ -1,33 +1,39 @@
 #include "../includes/filler.h"
 
-void ft_free_stringtab(char **element)
+void ft_free_map(char **element, t_arg_filler *arg)
 {
 	int i;
 
 	i = -1;
 	if (!element)
 		return ;
-	while (element[++i])
-		free(element[i]);
+	while (++i < arg->map_size_x)
+		ft_strdel(&element[i]);
 	free(element);
 }
 
-void ft_free_intab(int *element)
+void ft_free_piece(char **element, t_arg_filler *arg)
 {
 	int i;
 
 	i = -1;
 	if (!element)
 		return ;
-	while (element[++i])
+	while (++i < arg->piece_size_x)
+		ft_strdel(&element[i]);
+	free(element);
+}
+
+void ft_free_intab(int **element, t_arg_filler *arg)
+{
+	int i;
+
+	i = -1;
+	if (!element)
+		return ;
+	while (++i < arg->map_size_x)
 		free(&element[i]);
 	free(element);
-}
-
-void free_all(t_arg_filler *arg)
-{
-	ft_free_stringtab(arg->map);
-	ft_free_stringtab(arg->piece);
 }
 
 void init_arg(t_arg_filler *arg)
@@ -43,14 +49,6 @@ void init_arg(t_arg_filler *arg)
 	arg->flag = 0;
 	arg->ret_x = 0;
 	arg->ret_y = 0;
-	arg->strategy = 0;
-	arg->start = 0;
-	arg->obj = 0;
-}
-
-void print_ret(t_arg_filler *arg)
-{
-	ft_printf("%i %i\n", arg->ret_x, arg->ret_y);
 }
 
 void print_map(t_arg_filler *arg)
@@ -62,6 +60,24 @@ void print_map(t_arg_filler *arg)
 	{
 		fprintf(stderr, "--%s--\n", arg->map[i]);
 		i++;
+	}
+}
+
+void print_special_map(t_arg_filler *arg)
+{
+	int i;
+	int j;
+
+	i = -1;
+	while (++i < arg->map_size_x)
+	{
+		j = -1;
+		while (++j < arg->map_size_y)
+		{
+			fprintf(stderr, "|%*i|", 3, arg->special_map[i][j]);
+
+		}
+		fprintf(stderr, "\n");
 	}
 }
 

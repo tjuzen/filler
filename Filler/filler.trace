@@ -1,5 +1,5 @@
-seed = 4696
-O: error on input
+seed = 8271
+./tjuzen.filler: Segfault at 94
 ./tjuzen.filler won
 Score:
-39AGAINST39
+69AGAINST94
